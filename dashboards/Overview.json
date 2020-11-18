@@ -855,7 +855,7 @@
       }
     },
     {
-      "type": "stat",
+      "type": "singlestat",
       "title": "Mesos Master",
       "valueFontSize": "80%",
       "postfixFontSize": "50%",
@@ -921,7 +921,7 @@
       "datasource": null
     },
     {
-      "type": "stat",
+      "type": "singlestat",
       "title": "Mesos Agent",
       "postfixFontSize": "50%",
       "prefix": "",
@@ -985,6 +985,103 @@
         "justifyMode": "auto"
       },
       "datasource": null
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_PROMETHEUS}",
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 666,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(irate(haproxy_frontend_http_responses_total[5m])) by (code)",
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "legendFormat": "Frontend {{ code }}",
+          "metric": "",
+          "refId": "A",
+          "step": 30
+        },
+        {
+          "expr": "sum(irate(haproxy_backend_http_responses_total[5m])) by (code)",
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "legendFormat": "Backend {{ code }}",
+          "metric": "",
+          "refId": "B",
+          "step": 30
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Marathon-LB 请求状态码",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "collapsed": false,
@@ -1203,7 +1300,7 @@
       "gridPos": {
         "h": 6,
         "w": 4,
-        "x": 6,
+        "x": 4,
         "y": 37
       },
       "id": 21,
@@ -1248,7 +1345,7 @@
       "gridPos": {
         "h": 6,
         "w": 4,
-        "x": 12,
+        "x": 8,
         "y": 43
       },
       "id": 22,
