@@ -66,7 +66,7 @@
       "id": 101,
       "panels": [],
       "repeat": null,
-      "title": "Mesos",
+      "title": "DC/OS",
       "type": "row"
     },
     {
@@ -111,21 +111,21 @@
           "expr": "avg(mesos_slave_cpus_percent{dcos_cluster_name=\"$clustername\"})",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Allocated",
+          "legendFormat": "分配",
           "refId": "A"
         },
         {
           "expr": "avg(max by(instance)(cpu_usage_system{dcos_cluster_name=\"$clustername\"} + cpu_usage_user{dcos_cluster_name=\"$clustername\"} + cpu_usage_guest{dcos_cluster_name=\"$clustername\"}) / 100)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Used",
+          "legendFormat": "使用",
           "refId": "B"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "CPUs",
+      "title": "Mesos CPU",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -206,21 +206,21 @@
           "expr": "sum(sum by (host) (mem_used{dcos_cluster_name=\"$clustername\"}))",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Allocated",
+          "legendFormat": "分配",
           "refId": "B"
         },
         {
           "expr": "sum(sum by (host) (mem_rss_bytes{dcos_cluster_name=\"$clustername\"}))",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Used",
+          "legendFormat": "使用",
           "refId": "A"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Memory",
+      "title": "Mesos 内存",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -260,24 +260,334 @@
       }
     },
     {
-      "description": "",
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "${DS_PROMETHEUS}",
+      "decimals": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
       "gridPos": {
-        "h": 24,
-        "w": 8,
+        "h": 6,
+        "w": 4,
+        "x": 20,
+        "y": 0
+      },
+      "id": 201,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": " msg/sec",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeat": null,
+      "repeatDirection": "h",
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(kafka_server_BrokerTopicMetrics_MessagesInPerSec_5MinuteRate{service_name=\"kafka\"})",
+          "format": "time_series",
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "title": "Kafka每秒消息数",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "0",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#d44a3a",
+        "rgba(237, 129, 40, 0.89)",
+        "#3f6833"
+      ],
+      "datasource": "${DS_PROMETHEUS}",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
         "x": 16,
         "y": 0
       },
-      "headings": false,
-      "id": 3,
-      "limit": 100,
+      "id": 167,
+      "interval": null,
       "links": [],
-      "query": "Summary",
-      "recent": false,
-      "search": true,
-      "starred": false,
-      "tags": [],
-      "title": "More Detail",
-      "type": "dashlist"
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "count(count by (topic) (kafka_server_BrokerTopicMetrics_MessagesInPerSec_5MinuteRate{executor_name=\"kafka\",service_name=\"kafka\"}))",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "title": "Kafka Topic数",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "0",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#d44a3a",
+        "rgba(237, 129, 40, 0.89)",
+        "#3f6833"
+      ],
+      "datasource": "${DS_PROMETHEUS}",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 16,
+        "y": 6
+      },
+      "id": 116,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "mesos_master_frameworks_tasks_active{framework_name=\"cassandra\", task_state=\"task_running\"}",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "0,1",
+      "title": "Cassandra运行节点",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "${DS_PROMETHEUS}",
+      "format": "none",
+      "gauge": {
+        "maxValue": 1000,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 20,
+        "y": 6
+      },
+      "id": 57,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(org_apache_cassandra_metrics_Client_connectedNativeClients{service_name=\"cassandra\"})",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Clients Count",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "title": "Cassandra连接客户端",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
     },
     {
       "aliasColors": {},
@@ -321,14 +631,14 @@
           "expr": "sum(mesos_slave_disk_percent{dcos_cluster_name=\"$clustername\"})",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Allocated",
+          "legendFormat": "分配",
           "refId": "C"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Disk",
+      "title": "Mesos 磁盘",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -407,14 +717,14 @@
           "expr": "sum(mesos_master_gpus_percent{dcos_cluster_name=\"$clustername\"})",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Allocated",
+          "legendFormat": "分配",
           "refId": "D"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "GPUs",
+      "title": "Mesos GPU",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -493,28 +803,21 @@
           "expr": "sum(mesos_master_frameworks_connected{dcos_cluster_name=\"$clustername\"})",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Services",
+          "legendFormat": "Frameworks",
           "refId": "A"
         },
         {
-          "expr": "count(count by(task_name) (cpus_soft_limit{dcos_cluster_name=\"$clustername\"}))",
+          "expr": "count(count by(container_id) (cpus_limit{dcos_cluster_name=\"$clustername\"}))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Tasks",
           "refId": "B"
-        },
-        {
-          "expr": "count(count by(container_id) (cpus_soft_limit{dcos_cluster_name=\"$clustername\"}))",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Containers",
-          "refId": "C"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Running Workload",
+      "title": "Mesos 运行负载",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -552,57 +855,136 @@
       }
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
-      "fill": 1,
+      "type": "stat",
+      "title": "Mesos Master",
+      "valueFontSize": "80%",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
       "gridPos": {
         "h": 6,
-        "w": 16,
-        "x": 0,
-        "y": 18
+        "w": 4,
+        "x": 16,
+        "y": 12
       },
-      "id": 7,
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "id": 23763571993,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "value": null,
+                "color": "green"
+              },
+              {
+                "value": 200,
+                "color": "red"
+              }
+            ]
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "pluginVersion": "7.1.5",
       "targets": [
         {
           "expr": "count(system_uptime{job=\"master-metrics\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
           "legendFormat": "Masters",
+          "interval": "",
           "refId": "A"
-        },
-        {
-          "expr": "count(system_uptime{job=\"agent-metrics\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Agents",
-          "refId": "B"
         }
       ],
-      "thresholds": [190,200],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Connected Nodes",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "mean"
+          ],
+          "fields": ""
+        },
+        "orientation": "auto",
+        "textMode": "auto",
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto"
       },
-      "type": "gauge"
+      "datasource": null
+    },
+    {
+      "type": "stat",
+      "title": "Mesos Agent",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 20,
+        "y": 12
+      },
+      "id": 23763571998,
+      "valueFontSize": "80%",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "value": null,
+                "color": "green"
+              },
+              {
+                "value": 100,
+                "color": "red"
+              }
+            ]
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "pluginVersion": "7.1.5",
+      "targets": [
+        {
+          "expr": "count(system_uptime{job=\"agent-metrics\"})",
+          "legendFormat": "Agent",
+          "interval": "",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "mean"
+          ],
+          "fields": ""
+        },
+        "orientation": "auto",
+        "textMode": "auto",
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto"
+      },
+      "datasource": null
     },
     {
       "collapsed": false,
@@ -657,6 +1039,51 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "MySQL慢查询",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_PROMETHEUS}",
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 25
+      },
+      "id": 17,
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "qce_cmongo_qps_max",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{instance_name}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Mongo QPS",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -730,54 +1157,9 @@
       "fill": 1,
       "gridPos": {
         "h": 6,
-        "w": 24,
+        "w": 4,
         "x": 0,
         "y": 37
-      },
-      "id": 17,
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "qce_cmongo_qps_max",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "{{instance_name}}",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Mongo QPS",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
-      "fill": 1,
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 0,
-        "y": 43
       },
       "id": 20,
       "lines": true,
@@ -797,7 +1179,7 @@
           "expr": "elasticsearch_cluster_health_number_of_nodes",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "ES健康节点数",
+          "legendFormat": "{{cluster}}",
           "refId": "A"
         }
       ],
@@ -809,7 +1191,7 @@
         "sort": 0,
         "value_type": "individual"
       },
-      "type": "gauge"
+      "type": "singlestat"
     },
     {
       "aliasColors": {},
@@ -820,9 +1202,9 @@
       "fill": 1,
       "gridPos": {
         "h": 6,
-        "w": 6,
+        "w": 4,
         "x": 6,
-        "y": 43
+        "y": 37
       },
       "id": 21,
       "lines": true,
@@ -854,7 +1236,7 @@
         "sort": 0,
         "value_type": "individual"
       },
-      "type": "gauge"
+      "type": "singlestat"
     },
     {
       "aliasColors": {},
@@ -865,7 +1247,7 @@
       "fill": 1,
       "gridPos": {
         "h": 6,
-        "w": 6,
+        "w": 4,
         "x": 12,
         "y": 43
       },
@@ -899,7 +1281,7 @@
         "sort": 0,
         "value_type": "individual"
       },
-      "type": "gauge"
+      "type": "singlestat"
     }
   ],
   "refresh": false,
