@@ -20,7 +20,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "5.3.4"
+      "version": "7.0"
     },
     {
       "type": "panel",
@@ -56,6 +56,20 @@
   "links": [],
   "panels": [
     {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 16,
+        "x": 0,
+        "y": 0
+      },
+      "id": 101,
+      "panels": [],
+      "repeat": null,
+      "title": "Mesos",
+      "type": "row"
+    },
+    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -68,7 +82,7 @@
         "x": 0,
         "y": 0
       },
-      "id": 20,
+      "id": 1,
       "legend": {
         "alignAsTable": true,
         "avg": false,
@@ -163,7 +177,7 @@
         "x": 8,
         "y": 0
       },
-      "id": 19,
+      "id": 2,
       "legend": {
         "alignAsTable": true,
         "avg": false,
@@ -247,7 +261,6 @@
     },
     {
       "description": "",
-      "folderId": 0,
       "gridPos": {
         "h": 24,
         "w": 8,
@@ -255,7 +268,7 @@
         "y": 0
       },
       "headings": false,
-      "id": 2,
+      "id": 3,
       "limit": 100,
       "links": [],
       "query": "Summary",
@@ -279,7 +292,7 @@
         "x": 0,
         "y": 6
       },
-      "id": 17,
+      "id": 4,
       "legend": {
         "alignAsTable": true,
         "avg": false,
@@ -365,7 +378,7 @@
         "x": 8,
         "y": 6
       },
-      "id": 18,
+      "id": 5,
       "legend": {
         "alignAsTable": true,
         "avg": false,
@@ -451,7 +464,7 @@
         "x": 0,
         "y": 12
       },
-      "id": 16,
+      "id": 6,
       "legend": {
         "alignAsTable": true,
         "avg": false,
@@ -551,18 +564,7 @@
         "x": 0,
         "y": 18
       },
-      "id": 14,
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": false
-      },
+      "id": 7,
       "lines": true,
       "linewidth": 1,
       "links": [],
@@ -591,7 +593,7 @@
           "refId": "B"
         }
       ],
-      "thresholds": [],
+      "thresholds": [190,200],
       "timeFrom": null,
       "timeShift": null,
       "title": "Connected Nodes",
@@ -600,36 +602,304 @@
         "sort": 0,
         "value_type": "individual"
       },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
+      "type": "gauge"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 16,
+        "x": 0,
+        "y": 24
       },
-      "yaxes": [
+      "id": 102,
+      "panels": [],
+      "repeat": null,
+      "title": "腾讯云",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_PROMETHEUS}",
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 25
+      },
+      "id": 8,
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
         {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
+          "expr": "qce_cdb_slowqueries_sum",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{instance_name}}",
+          "refId": "A"
         }
       ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "MySQL慢查询",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph"
+    },
+    {
+      "type": "gauge",
+      "title": "Redis内存使用率",
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 31
+      },
+      "id": 9,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "value": null,
+                "color": "green"
+              },
+              {
+                "value": 80,
+                "color": "red"
+              }
+            ]
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "pluginVersion": "7.1.5",
+      "targets": [
+        {
+          "expr": "qce_redis_storageusmin_avg",
+          "legendFormat": "{{instance_name}}",
+          "interval": "",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "mean"
+          ],
+          "fields": ""
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "datasource": null
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_PROMETHEUS}",
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 37
+      },
+      "id": 17,
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "qce_cmongo_qps_max",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{instance_name}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Mongo QPS",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_PROMETHEUS}",
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 0,
+        "y": 43
+      },
+      "id": 20,
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "elasticsearch_cluster_health_number_of_nodes",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "ES健康节点数",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ES健康节点",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "gauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_PROMETHEUS}",
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 6,
+        "y": 43
+      },
+      "id": 21,
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "elasticsearch_cluster_health_active_shards",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{cluster}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Elasticsearch 总分片数",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "gauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_PROMETHEUS}",
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 12,
+        "y": 43
+      },
+      "id": 22,
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "elasticsearch_cluster_health_unassigned_shards",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{cluster}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Elasticsearch 未分配分片数",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "gauge"
     }
   ],
   "refresh": false,
@@ -691,7 +961,7 @@
     ]
   },
   "timezone": "",
-  "title": "DC/OS Overview",
-  "uid": "ACo4Hq1ik",
+  "title": "All in One Overview",
+  "uid": "allinone",
   "version": 29
 }
